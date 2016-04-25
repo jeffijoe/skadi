@@ -1,0 +1,38 @@
+{
+  "name": "skadi",
+  "version": "0.0.1",
+  "description": "A validation and object sanitizer based on is-my-json-valid",
+  "main": "lib/skadi.js",
+  "engines": {
+    "node": ">=4.0.0"
+  },
+  "scripts": {
+    "test": "mocha test/**/*.js --require test/index.js",
+    "test-watch": "npm run test -- --watch",
+    "lint": "esw lib/ test/",
+    "lint-watch": "npm run lint -- --watch",
+    "cover": "istanbul cover  -x \"**example/**\" ./node_modules/mocha/bin/_mocha -- test/**/*.js --require test/index.js",
+    "coveralls": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- test/**/*.js --require test/index.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jeffijoe/skadi.git"
+  },
+  "keywords": [],
+  "author": "Jeff Hansen <jeff@jeffijoe.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jeffijoe/skadi/issues"
+  },
+  "homepage": "https://github.com/jeffijoe/skadi#readme",
+  "devDependencies": {
+    "chai": "*",
+    "eslint": "*",
+    "eslint-watch": "*",
+    "istanbul": "*",
+    "mocha": "*",
+    "sinon": "*",
+    "sinon-chai": "*"
+  },
+  "dependencies": {}
+}
