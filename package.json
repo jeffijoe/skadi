@@ -27,13 +27,14 @@
   },
   "homepage": "https://github.com/jeffijoe/skadi#readme",
   "devDependencies": {
-    "chai": "*",
-    "eslint": "*",
-    "eslint-watch": "*",
-    "istanbul": "*",
-    "mocha": "*",
-    "sinon": "*",
-    "sinon-chai": "*"
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.9",
+    "eslint": "^2.8.0",
+    "eslint-watch": "^2.1.10",
+    "istanbul": "^0.4.3",
+    "mocha": "^2.4.5",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0"
   },
   "dependencies": {
     "is-my-json-valid": "^2.13.1",
