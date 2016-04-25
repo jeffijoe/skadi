@@ -1,6 +1,6 @@
 # skadi
 
-[![npm version](https://badge.fury.io/js/YOUR-NPM-MODULE.svg)](https://badge.fury.io/js/skadi)
+[![npm version](https://badge.fury.io/js/skadi.svg)](https://badge.fury.io/js/skadi)
 [![Dependency Status](https://david-dm.org/jeffijoe/skadi.svg)](https://david-dm.org/jeffijoe/skadi)
 [![devDependency Status](https://david-dm.org/jeffijoe/skadi/dev-status.svg)](https://david-dm.org/jeffijoe/skadi#info=devDependencies)
 [![Build Status](https://travis-ci.org/jeffijoe/skadi.svg?branch=master)](https://travis-ci.org/jeffijoe/skadi)
