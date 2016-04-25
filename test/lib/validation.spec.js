@@ -67,6 +67,16 @@ describe('validation utilities', function() {
           });
         });
 
+        describe('picker', function() {
+          it('returns the picked object which is not the same instance', function() {
+            const input = { name: 'Test' };
+            const ctx = validator.context(input);
+            const picked = ctx.pick();
+            picked.should.not.equal(input);
+            picked.should.deep.equal({ name: 'Test' });
+          });
+        });
+
         describe('end', function() {
           it('returns null when preventThrow is true', function() {
             const ctx = validator.context({ name: 123 });

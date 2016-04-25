@@ -9,7 +9,8 @@ describe('schema utilities', function() {
     let picker;
     before(() => {
       picker = createPicker(
-        rewriteSchema(simpleSchema)
+        rewriteSchema(simpleSchema),
+        { additionalPropertiesProp: '_additionalProperties' }
       );
     });
 
@@ -47,6 +48,20 @@ describe('schema utilities', function() {
       const picked = picker(src);
 
       picked.should.deep.equal(src);
+    });
+
+    it('uses additionalProperties per default', function() {
+      const subject = createPicker({
+        type: 'object',
+        additionalProperties: false,
+        properties: {
+          name: {
+            type: 'string'
+          }
+        }
+      });
+
+      subject({ name: 'test', other: 'stuff' }).should.deep.equal({ name: 'test' });
     });
   });
 
