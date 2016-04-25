@@ -8,7 +8,6 @@
   },
   "scripts": {
     "test": "mocha test/**/*.js --require test/index.js",
-    "test-raw": "node node_modules/mocha/bin/_mocha test/**/*.js --require test/index.js",
     "test-watch": "npm run test -- --watch",
     "lint": "esw lib/ test/",
     "lint-watch": "npm run lint -- --watch",

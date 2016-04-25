@@ -8,7 +8,7 @@
 [![Code Climate](https://codeclimate.com/github/jeffijoe/skadi/badges/gpa.svg)](https://codeclimate.com/github/jeffijoe/skadi)
 
 
-An object validator/sanitizer based on `is-my-json-valid`.
+A simple object validator/sanitizer based on `is-my-json-valid`.
 
 # Installation
 
@@ -124,12 +124,16 @@ myAwesomeValidator({ username: 'Skadi' })
   });
 ```
 
+# Examples
+
+Check the `example/` directory, there's an `index.js` that you can run with `node example/index.js`.
+
 # Top-level API
 
 The `skadi` object exports 3 things:
 
 * `createValidator`: the meat of the package.
-* `createPicker`: used internally, but could be useful for you.
+* `createPicker`: used internally, but could be useful to you.
 * `ValidationError`: thrown when you've got too much confidence.
 
 ## `createValidator`
@@ -172,15 +176,18 @@ myPicker({ name: 'Skadi', other: 'stuff' });
 
 ## `ValidationError`
 
-Thrown when using `validator()` or `validator.context({}).end()`, has `errors`.
+Thrown when using `validator()` or `validator.context({}).end()`.
+
+Contains an `errors` array.
 
 # Validation Context object
 
-When using `validator.context(obj)`, a validation context is returned. This is what it's got:
+When using `validator.context(obj)`, a validation context is returned. This is what you get:
 
 * `errors`: An array of `{ field, message }`. You can push and pop from it as you see fit. See the async validation use case for an example of how/why you'd want to do this.
 * `valid()`: Very simply checks the length of `errors`, and returns `true` if there are none, and `false` when there are errors. Does not throw.
-* `end()`: If `valid()` returns false, will throw a `ValidationError` which will contain the errors array. If everything is smooth, returns a sanitized object.
+* `pick()`: Returns a sanitized version of the object passed to `context()`.
+* `end()`: If `valid()` returns false, will throw a `ValidationError` which will contain the errors array. If everything is smooth, returns a sanitized object (using `pick()`).
 
 # Author
 
