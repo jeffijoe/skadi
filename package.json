@@ -8,6 +8,7 @@
   },
   "scripts": {
     "test": "mocha test/**/*.js --require test/index.js",
+    "test-raw": "node node_modules/mocha/bin/_mocha test/**/*.js --require test/index.js",
     "test-watch": "npm run test -- --watch",
     "lint": "esw lib/ test/",
     "lint-watch": "npm run lint -- --watch",
@@ -34,5 +35,8 @@
     "sinon": "*",
     "sinon-chai": "*"
   },
-  "dependencies": {}
+  "dependencies": {
+    "is-my-json-valid": "^2.13.1",
+    "lodash": "^4.11.1"
+  }
 }

@@ -114,7 +114,7 @@
     "no-var": 0,
     "no-warning-comments": [0, { "terms": ["todo", "fixme", "xxx"], "location": "start" }],
     "no-with": 2,
-    "no-extra-parens": 2,
+    "no-extra-parens": 0,
     "block-scoped-var": 0,
     "brace-style": [2, "1tbs", { "allowSingleLine": true }],
     "camelcase":2,
