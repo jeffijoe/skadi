@@ -83,6 +83,7 @@ Here's an example that makes the validator async.
 // It takes a db so we can look up a user.
 function createMyAwesomeValidator(db) {
   const validator = createValidator({
+    type: 'object',
     properties: {
       username: {
         type: 'string',
