@@ -1,16 +1,16 @@
-'use strict';
+'use strict'
 
 /**
  * Catches an error when executing the given function, and
  * returns it.
  */
-function catchError(fn) {
+function catchError (fn) {
   try {
-    fn();
-    return undefined;
+    fn()
+    return undefined
   } catch (err) {
-    return err;
+    return err
   }
 }
 
-module.exports = catchError;
+module.exports = catchError

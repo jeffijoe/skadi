@@ -6,7 +6,7 @@
 [![Build Status](https://travis-ci.org/jeffijoe/skadi.svg?branch=master)](https://travis-ci.org/jeffijoe/skadi)
 [![Coverage Status](https://coveralls.io/repos/github/jeffijoe/skadi/badge.svg?branch=master)](https://coveralls.io/github/jeffijoe/skadi?branch=master)
 [![Code Climate](https://codeclimate.com/github/jeffijoe/skadi/badges/gpa.svg)](https://codeclimate.com/github/jeffijoe/skadi)
-
+[![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 A simple object validator/sanitizer based on `is-my-json-valid`.
 
@@ -20,7 +20,7 @@ npm install skadi --save
 
 ```javascript
 // Import
-const { createValidator, ValidationError } = require('skadi');
+const { createValidator, ValidationError } = require('skadi')
 
 // Create a validator using a JSON-schema.
 const myValidator = createValidator({
@@ -32,15 +32,15 @@ const myValidator = createValidator({
       required: true
     }
   }
-});
+})
 
 // Use it
 const input = {
   name: 'Test',
   otherStuffThatIsNotRelevant: 'hehe'
-};
+}
 
-const result = myValidator(input);
+const result = myValidator(input)
 // << { name: 'Test' }
 ```
 
@@ -48,10 +48,10 @@ When used like above, validation errors will throw.
 
 ```javascript
 try {
-  myValidator({ anInvalid: 'object', because: 'it has no name' });
+  myValidator({ anInvalid: 'object', because: 'it has no name' })
 } catch (err) {
-  console.log(err instanceof ValidationError); // << true
-  console.log(err.errors); // << [{ field: 'name', message: 'is required' }]
+  console.log(err instanceof ValidationError) // << true
+  console.log(err.errors) // << [{ field: 'name', message: 'is required' }]
 }
 
 ```
@@ -59,17 +59,17 @@ try {
 Alternative usage:
 
 ```javascript
-const context = myValidator.context({ });
-console.log(context.valid()); // << false
-console.log(context.errors); // << [{ field: 'name', message: 'is required' }]
+const context = myValidator.context({ })
+console.log(context.valid()) // << false
+console.log(context.errors) // << [{ field: 'name', message: 'is required' }]
 
-const anotherContext = myValidator.context({ name: 'Skadi', other: 'stuff' });
-console.log(anotherContext.valid()); // << true
-console.log(anotherContext.pick()); // << { name: 'Skadi' }
+const anotherContext = myValidator.context({ name: 'Skadi', other: 'stuff' })
+console.log(anotherContext.valid()) // << true
+console.log(anotherContext.pick()) // << { name: 'Skadi' }
 
 // We can add errors manually..
-anotherContext.errors.push({ field: 'name', message: 'Too cool, man' });
-console.log(anotherContext.valid()); // << false
+anotherContext.errors.push({ field: 'name', message: 'Too cool, man' })
+console.log(anotherContext.valid()) // << false
 ```
 
 # Use Case: custom, async validation.
@@ -90,10 +90,10 @@ function createMyAwesomeValidator(db) {
         required: true
       }
     }
-  });
+  })
 
   return (objToValidate) => {
-    const context = validator.context(objToValidate);
+    const context = validator.context(objToValidate)
 
     // Check if username is taken. This is async.
     return db.users.findWhere({ username: objToValidate.username })
@@ -102,27 +102,27 @@ function createMyAwesomeValidator(db) {
           context.errors.push({
             field: 'username',
             message: 'This username is taken!'
-          });
+          })
         }
 
         // .end() will do the same as calling
         // validator(obj) directly: sanitize and return the object
         // if successful, throw if not.
-        return context.end();
-      });
-  };
+        return context.end()
+      })
+  }
 }
 
 // Create our validator..
-const myAwesomeValidator = createMyAwesomeValidator(someDbModule);
+const myAwesomeValidator = createMyAwesomeValidator(someDbModule)
 myAwesomeValidator({ username: 'Skadi' })
   .then(user => {
     // Success! We now have a sanitized user.
   })
   .catch(err => {
     // Could be a validation error.
-    console.log(err instanceof ValidationError);
-  });
+    console.log(err instanceof ValidationError)
+  })
 ```
 
 # Examples
@@ -144,13 +144,13 @@ Given a JSON-schema, will create a validator function.
 `additionalProperties` in JSON-schema means that validation should fail, but Skadi will rewrite the schema so it won't - instead, we filter out unwanted properties after validating. You don't really have to understand this.
 
 ```javascript
-const myValidator = createValidator(...);
+const myValidator = createValidator(...)
 
 // This...
-myValidator({ some: 'object' });
+myValidator({ some: 'object' })
 
 // Is the *exact same* as...
-myValidator.context({ some: 'object' }).end();
+myValidator.context({ some: 'object' }).end()
 ```
 
 ## `createPicker`
@@ -171,7 +171,7 @@ const myPicker = skadi.createPicker({
   }
 })
 
-myPicker({ name: 'Skadi', other: 'stuff' });
+myPicker({ name: 'Skadi', other: 'stuff' })
 // << { name: 'Skadi' }
 ```
 

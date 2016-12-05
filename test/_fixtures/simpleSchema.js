@@ -1,12 +1,10 @@
-'use strict';
+'use strict'
 
 module.exports = {
   additionalProperties: false,
   type: 'object',
   properties: {
-    name: {
-      type: 'string'
-    },
+    name: 'string',
     settings: {
       type: 'object',
       additionalProperties: true,
@@ -17,10 +15,7 @@ module.exports = {
       }
     },
     tags: {
-      type: 'array',
-      items: {
-        type: 'string'
-      }
+      array: 'string'
     },
     notes: {
       type: 'array',
@@ -28,14 +23,10 @@ module.exports = {
         type: 'object',
         additionalProperties: false,
         properties: {
-          title: {
-            type: 'string'
-          },
-          likes: {
-            type: 'number'
-          }
+          title: 'string',
+          likes: 'number'
         }
       }
     }
   }
-};
+}
