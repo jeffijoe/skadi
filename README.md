@@ -125,6 +125,10 @@ myAwesomeValidator({ username: 'Skadi' })
   })
 ```
 
+# Why not just use `validator.filter` from `is-my-json-valid`?
+
+Because it mutates the object rather than returning a new one.
+
 # Examples
 
 Check the `example/` directory, there's an `index.js` that you can run with `node example/index.js`.
