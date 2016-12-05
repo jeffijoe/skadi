@@ -190,6 +190,14 @@ When using `validator.context(obj)`, a validation context is returned. This is w
 * `pick()`: Returns a sanitized version of the object passed to `context()`.
 * `end()`: If `valid()` returns false, will throw a `ValidationError` which will contain the errors array. If everything is smooth, returns a sanitized object (using `pick()`).
 
+# Changelog
+
+* 1.0.0
+  - Added support for JSON Schema Shorthands.
+  - Switched to StandardJS style guide.
+* 0.2.0
+  - First real release.
+
 # Author
 
 Jeff Hansen - [@Jeffijoe](https://twitter.com/Jeffijoe)
