@@ -59,7 +59,7 @@ describe('validation utilities', function () {
               },
               required: ['name', 'age']
             }).context({ name: 123 }).errors
-            errors.length.should.equal(1)
+            errors.length.should.equal(2)
           })
 
           it('can be turned off', function () {

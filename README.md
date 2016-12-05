@@ -196,9 +196,11 @@ When using `validator.context(obj)`, a validation context is returned. This is w
 
 # Changelog
 
+* 1.1.1
+  - Make it actually be greedy by default, dammit.
 * 1.1.0
-    - Added support for passing options to `is-my-json-valid`.
-    - Greedy mode on by default.
+  - Added support for passing options to `is-my-json-valid`.
+  - Greedy mode on by default.
 * 1.0.0
   - Added support for JSON Schema Shorthands.
   - Switched to StandardJS style guide.
