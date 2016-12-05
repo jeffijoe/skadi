@@ -49,6 +49,33 @@ describe('validation utilities', function () {
           errors[0].field.should.equal('name')
         })
 
+        describe('greedy mode', function () {
+          it('is on by default', function () {
+            const errors = createValidator({
+              type: 'object',
+              properties: {
+                name: 'string',
+                age: 'number'
+              },
+              required: ['name', 'age']
+            }).context({ name: 123 }).errors
+            errors.length.should.equal(1)
+          })
+
+          it('can be turned off', function () {
+            const errors = createValidator({
+              type: 'object',
+              properties: {
+                name: 'string',
+                age: 'number'
+              },
+              required: ['name', 'age']
+            }, { greedy: false }).context({ name: 123 }).errors
+
+            errors.length.should.equal(1)
+          })
+        })
+
         describe('valid', function () {
           it('returns true if valid', function () {
             const ctx = validator.context({ name: 'Jeff' })
