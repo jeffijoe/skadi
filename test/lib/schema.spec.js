@@ -97,7 +97,7 @@ describe('schema utilities', function () {
       newSchema.definitions.deffo.should.have.property('_additionalProperties')
     })
 
-    it('supports anyOf', function () {
+    it('supports anyOf, allOf, oneOf and not', function () {
       const newSchema = rewriteSchema({
         anyOf: [
           {
@@ -125,6 +125,39 @@ describe('schema utilities', function () {
                     }
                   }
                 ]
+              }
+            }
+          },
+          {
+            type: 'object',
+            additionalProperties: false,
+            properties: {
+              cool: {
+                not: {
+                  type: 'number'
+                }
+              },
+              someAllOf: {
+                allOf: [{
+                  object: {
+                    hey: 'string'
+                  }
+                }, {
+                  object: {
+                    ho: 'string'
+                  }
+                }]
+              },
+              someOneOf: {
+                oneOf: [{
+                  object: {
+                    hey: 'string'
+                  }
+                }, {
+                  object: {
+                    ho: 'string'
+                  }
+                }]
               }
             }
           }

@@ -196,6 +196,8 @@ When using `validator.context(obj)`, a validation context is returned. This is w
 
 # Changelog
 
+* 1.1.2
+  - Added support for `allOf`, `oneOf` and `not` picking.
 * 1.1.1
   - Make it actually be greedy by default, dammit.
 * 1.1.0
