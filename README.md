@@ -8,7 +8,7 @@
 [![Code Climate](https://codeclimate.com/github/jeffijoe/skadi/badges/gpa.svg)](https://codeclimate.com/github/jeffijoe/skadi)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
-A simple object validator/sanitizer based on `is-my-json-valid`.
+A simple object validator/sanitizer based on `is-my-json-valid` - supports some [useful shorthands](https://github.com/yanick/json-schema-shorthand) as well.
 
 # Installation
 
