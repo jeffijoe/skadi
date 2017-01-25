@@ -85,10 +85,7 @@ function createMyAwesomeValidator(db) {
   const validator = createValidator({
     type: 'object',
     properties: {
-      username: {
-        type: 'string',
-        required: true
-      }
+      username: 'string!' // shortcut, see https://github.com/yanick/json-schema-shorthand#required-property
     }
   })
 
