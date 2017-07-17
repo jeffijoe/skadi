@@ -8,7 +8,7 @@ const simpleSchema = require('../_fixtures/simpleSchema')
 describe('validation utilities', function () {
   describe('createValidator', function () {
     it('returns a validator function', function () {
-      createValidator(simpleSchema).should.be.a.function
+      createValidator(simpleSchema).should.be.a('function')
     })
 
     describe('validator', function () {
@@ -39,11 +39,11 @@ describe('validation utilities', function () {
 
         it('creates a context with a valid and end function, as well as errors', function () {
           validator = createValidator(simpleSchema)
-          expect(validator.context({}).end).to.exist.and.be.a.function
-          expect(validator.context({}).valid).to.exist.and.be.a.function
+          expect(validator.context({}).end).to.exist.and.be.a('function')
+          expect(validator.context({}).valid).to.exist.and.be.a('function')
 
           const errors = validator.context({ name: 123 }).errors
-          expect(errors).to.exist.and.be.an.array
+          expect(errors).to.exist.and.be.an('array')
 
           errors.length.should.not.equal(0)
           errors[0].field.should.equal('name')

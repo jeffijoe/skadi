@@ -7,8 +7,8 @@ describe('skadi', function () {
   })
 
   it('exports the public API', function () {
-    expect(skadi.createValidator).to.be.a.function
-    expect(skadi.createPicker).to.be.a.function
-    expect(skadi.ValidationError).to.be.a.function
+    expect(skadi.createValidator).to.be.a('function')
+    expect(skadi.createPicker).to.be.a('function')
+    expect(skadi.ValidationError).to.be.a('function')
   })
 })

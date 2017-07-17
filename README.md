@@ -193,6 +193,8 @@ When using `validator.context(obj)`, a validation context is returned. This is w
 
 # Changelog
 
+* 1.3.0
+  - Added TypeScript definitions.
 * 1.2.0
   - Updated `json-schema-shorthand` to 0.2.0, which adds support for the `type!` shortcut.
 * 1.1.2
