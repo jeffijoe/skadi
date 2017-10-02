@@ -66,13 +66,13 @@ describe('schema utilities', function () {
   })
 
   describe('rewriteSchema', function () {
-    it('rewrites all additionalProperties to _additionalProperties', function () {
+    it('rewrites all additionalProperties to _additionalProperties if false', function () {
       const newSchema = rewriteSchema(simpleSchema)
 
       newSchema.should.not.have.property('additionalProperties')
       newSchema.should.have.property('_additionalProperties')
-      newSchema.properties.settings.should.not.have.property('additionalProperties')
-      newSchema.properties.settings.should.have.property('_additionalProperties')
+      newSchema.properties.settings.should.have.property('additionalProperties')
+      newSchema.properties.settings.should.not.have.property('_additionalProperties')
     })
 
     it('supports definitions', function () {
@@ -102,7 +102,7 @@ describe('schema utilities', function () {
         anyOf: [
           {
             type: 'object',
-            additionalProperties: false,
+            additionalProperties: {},
             properties: {
               cool: {
                 type: 'string'
@@ -111,7 +111,7 @@ describe('schema utilities', function () {
           },
           {
             type: 'object',
-            additionalProperties: true,
+            additionalProperties: false,
             properties: {
               stuff: {
                 anyOf: [
@@ -164,8 +164,10 @@ describe('schema utilities', function () {
         ]
       })
 
-      newSchema.anyOf[0].should.not.have.property('additionalProperties')
-      newSchema.anyOf[0].should.have.property('_additionalProperties')
+      newSchema.anyOf[0].should.have.property('additionalProperties')
+      newSchema.anyOf[0].additionalProperties.should.be.an('object')
+      newSchema.anyOf[0].should.not.have.property('_additionalProperties')
+
       newSchema.anyOf[1].should.not.have.property('additionalProperties')
       newSchema.anyOf[1].should.have.property('_additionalProperties')
 
