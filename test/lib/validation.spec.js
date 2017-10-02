@@ -31,6 +31,21 @@ describe('validation utilities', function () {
         result.should.deep.equal({ name: 'nice' })
       })
 
+      it('supports additionalProperties as an object', () => {
+        const validate = createValidator({
+          type: 'object',
+          additionalProperties: {
+            type: 'string'
+          }
+        })
+
+        let result = validate.context({ hello: 123 })
+        result.errors[0].message.should.match(/is the wrong type/)
+
+        result = validate.context({ hello: 'world' })
+        result.errors.should.be.empty
+      })
+
       describe('context', function () {
         it('exists', function () {
           validator = createValidator(simpleSchema)
@@ -96,7 +111,7 @@ describe('validation utilities', function () {
 
         describe('picker', function () {
           it('returns the picked object which is not the same instance', function () {
-            const input = { name: 'Test' }
+            const input = { name: 'Test', nonexistentProp: 123 }
             const ctx = validator.context(input)
             const picked = ctx.pick()
             picked.should.not.equal(input)

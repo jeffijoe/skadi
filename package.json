@@ -29,23 +29,23 @@
   },
   "homepage": "https://github.com/jeffijoe/skadi#readme",
   "devDependencies": {
-    "chai": "^4.1.0",
-    "coveralls": "^2.11.15",
-    "eslint": "^4.2.0",
+    "chai": "^4.1.2",
+    "coveralls": "^3.0.0",
+    "eslint": "^4.8.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-node": "^5.2.0",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-standard": "^3.0.1",
     "eslint-watch": "^3.1.2",
     "istanbul": "^0.4.5",
-    "mocha": "^3.2.0",
-    "sinon": "^2.3.8",
-    "sinon-chai": "^2.8.0",
-    "typescript": "^2.4.1"
+    "mocha": "^3.5.3",
+    "sinon": "^4.0.0",
+    "sinon-chai": "^2.14.0",
+    "typescript": "^2.5.3"
   },
   "dependencies": {
-    "is-my-json-valid": "^2.15.0",
+    "is-my-json-valid": "^2.16.1",
     "json-schema-shorthand": "^0.2.0",
     "lodash": "^4.17.4"
   }
