@@ -33,25 +33,30 @@ type TypeToValidate = {
   enumz: 'one' | 'two'
 }
 
-createValidator<TypeToValidate>({
-  properties: {
-    hello: 'string',
-    world: 'number',
-    nested: {
-      properties: {
-        yeah: 'string'
-      }
-    },
-    array: {
-      items: {
+createValidator<TypeToValidate>(
+  {
+    properties: {
+      hello: 'string',
+      world: 'number',
+      nested: {
         properties: {
-          wee: 'string',
-          woo: 'number'
+          yeah: 'string'
         }
+      },
+      array: {
+        items: {
+          properties: {
+            wee: 'string',
+            woo: 'number'
+          }
+        }
+      },
+      enumz: {
+        enum: ['one', 'two']
       }
-    },
-    enumz: {
-      enum: ['one', 'two']
     }
+  },
+  {
+    createError: errors => new Error(errors.map(e => e.message).join(','))
   }
-})
+)

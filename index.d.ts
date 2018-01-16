@@ -11,8 +11,13 @@
  */
 export function createValidator<T>(
   schema: ISchema<T>,
-  opts?: any
+  opts?: IValidatorOptions
 ): IValidator<T>
+
+export interface IValidatorOptions {
+  [key: string]: any
+  createError?: (errors: Array<IValidationError>) => Error
+}
 
 /**
  * Creates a picker function based on a JSON Schema.

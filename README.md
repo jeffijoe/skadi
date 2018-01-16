@@ -142,10 +142,26 @@ The `skadi` object exports 3 things:
 
 Given a JSON-schema, will create a validator function.
 
+The 2nd argument is an options object which are passed to `is-my-json-valid`, with the exception of `createError` which can be specified to tell Skadi how to throw a validation error.
+
 `additionalProperties` in JSON-schema means that validation should fail, but Skadi will rewrite the schema so it won't - instead, we filter out unwanted properties after validating. You don't really have to understand this.
 
 ```javascript
-const myValidator = createValidator(...)
+const myValidator = createValidator(
+  {
+    /* schema */
+  },
+  {
+    // -- the following are default options --
+
+    // tells `is-my-json-valid` to validate as much as possible before failing
+    greedy: true,
+    // tells `is-my-json-valid` to provide some more info on each error
+    verbose: true,
+    // tells Skadi to throw the result of this function; gets passed the validation errors.
+    createError: validationErrors => new ValidationError(validationErrors)
+  }
+)
 
 // This...
 myValidator({ some: 'object' })
@@ -193,6 +209,8 @@ When using `validator.context(obj)`, a validation context is returned. This is w
 
 # Changelog
 
+* 1.5.0
+  * Add `createError` option to customize the error being thrown.
 * 1.4.0
   * Improved TypeScript type defs
 * 1.3.0

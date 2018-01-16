@@ -136,6 +136,25 @@ describe('validation utilities', function() {
           })
         })
       })
+
+      describe('using a custom createError', () => {
+        class MyError extends Error {
+          constructor(errors) {
+            super('Oops')
+            this.errors = errors
+          }
+        }
+
+        it('throws the returned error', () => {
+          const v = createValidator(
+            { properties: { name: 'string' } },
+            { createError: errors => new MyError(errors) }
+          )
+          const err = catchError(() => v({ name: null }))
+          expect(err).to.be.an.instanceOf(MyError)
+          expect(err.errors.length).to.equal(1)
+        })
+      })
     })
   })
 })
