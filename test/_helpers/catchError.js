@@ -4,7 +4,7 @@
  * Catches an error when executing the given function, and
  * returns it.
  */
-function catchError (fn) {
+function catchError(fn) {
   try {
     fn()
     return undefined

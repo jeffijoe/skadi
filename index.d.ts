@@ -1,15 +1,18 @@
 /**
  * Creates a validator.
- * 
- * @param  {any} schema 
+ *
+ * @param  {any} schema
  * The JSON-Schema to use
- * 
- * @param  {any} opts   
+ *
+ * @param  {any} opts
  * Options passed to `is-my-json-valid`.
- * 
+ *
  * @return {IValidator}
  */
-export function createValidator (schema: any, opts?: any): IValidator
+export function createValidator<T>(
+  schema: ISchema<T>,
+  opts?: any
+): IValidator<T>
 
 /**
  * Creates a picker function based on a JSON Schema.
@@ -17,7 +20,10 @@ export function createValidator (schema: any, opts?: any): IValidator
  * if the Schema says to do so.
  * @type {any}
  */
-export function createPicker <T>(schema: any, opts?: ICreatePickerOptions): Picker<T>
+export function createPicker<T>(
+  schema: any,
+  opts?: ICreatePickerOptions
+): Picker<T>
 
 /**
  * Options for `createPicker`.
@@ -27,7 +33,7 @@ export interface ICreatePickerOptions {
    * What property should we look at to determine if additional properties
    * should be stripped out or not?
    * Default is `additionalProperties`.
-   * 
+   *
    * @type {string}
    */
   additionalPropertiesProp?: string
@@ -41,17 +47,17 @@ export type Picker<T> = (input: T) => T
 /**
  * Validator.
  */
-export interface IValidator {
+export interface IValidator<T> {
   /**
    * Validates the given object and returns a "clean" copy of it
    * based on the schema. Throws a `ValidationError` if invalid.
    * @type {T}
    */
-  <T>(input: T, preventThrow?: boolean): T | never
+  (input: T, preventThrow?: boolean): T | never
   /**
    * Creates a validation context.
    */
-  context<T> (input: T): IValidationContext<T>
+  context(input: T): IValidationContext<T>
 }
 
 /**
@@ -61,31 +67,31 @@ export interface IValidationContext<T> {
   /**
    * The errors. You can modify it as you please.
    * It's emptyness is what determines `valid()`.
-   * 
+   *
    * @type {Array<IValidationError>}
    */
   errors: Array<IValidationError>
-  
+
   /**
    * Returns a cleaned-up copy of the object based on the schema.
    * @return {T}
    */
-  pick (): T
-  
+  pick(): T
+
   /**
    * Determines if the context is valid.
    */
-  valid (): boolean
-  
+  valid(): boolean
+
   /**
    * Ends the context, throws `ValidationError` if `errors` is not empty.
-   * 
+   *
    * @param  {boolean} preventThrow
    * Prevents throwing an error, returns `null` if invalid.
-   * 
-   * @return {T}                    
+   *
+   * @return {T}
    */
-  end (preventThrow?: boolean): T | null | never
+  end(preventThrow?: boolean): T | null | never
 }
 
 /**
@@ -113,4 +119,37 @@ export class ValidationError extends Error {
    * @type {Array<IValidationError>}
    */
   errors: Array<IValidationError>
+}
+
+/**
+ * Primitive schema types.
+ */
+export type SchemaPrimitiveType = number | boolean | string | null
+
+/**
+ * Schema definition.
+ */
+export interface ISchema<T> {
+  $ref?: string
+  description?: string
+  allOf?: ISchema<T>[]
+  oneOf?: ISchema<T>[]
+  anyOf?: ISchema<T>[]
+  title?: string
+  type?: string | string[]
+  definitions?: { [key: string]: any }
+  format?: string
+  items?: ISchema<T[any]> | ISchema<T[any]>[]
+  minItems?: number
+  additionalItems?: {
+    anyOf: ISchema<T>[]
+  }
+  enum?: T[]
+  default?: SchemaPrimitiveType | Partial<T>
+  additionalProperties?: ISchema<T> | boolean
+  required?: boolean | string[]
+  propertyOrder?: string[]
+  properties?: { [K in keyof T]?: string | ISchema<T[K]> }
+  defaultProperties?: string[]
+  typeof?: 'function'
 }

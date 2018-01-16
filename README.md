@@ -53,13 +53,12 @@ try {
   console.log(err instanceof ValidationError) // << true
   console.log(err.errors) // << [{ field: 'name', message: 'is required' }]
 }
-
 ```
 
 Alternative usage:
 
 ```javascript
-const context = myValidator.context({ })
+const context = myValidator.context({})
 console.log(context.valid()) // << false
 console.log(context.errors) // << [{ field: 'name', message: 'is required' }]
 
@@ -89,12 +88,13 @@ function createMyAwesomeValidator(db) {
     }
   })
 
-  return (objToValidate) => {
+  return objToValidate => {
     const context = validator.context(objToValidate)
 
     // Check if username is taken. This is async.
-    return db.users.findWhere({ username: objToValidate.username })
-      .then((user) => {
+    return db.users
+      .findWhere({ username: objToValidate.username })
+      .then(user => {
         if (!user) {
           context.errors.push({
             field: 'username',
@@ -193,22 +193,24 @@ When using `validator.context(obj)`, a validation context is returned. This is w
 
 # Changelog
 
+* 1.4.0
+  * Improved TypeScript type defs
 * 1.3.0
-  - Added TypeScript definitions.
+  * Added TypeScript definitions.
 * 1.2.0
-  - Updated `json-schema-shorthand` to 0.2.0, which adds support for the `type!` shortcut.
+  * Updated `json-schema-shorthand` to 0.2.0, which adds support for the `type!` shortcut.
 * 1.1.2
-  - Added support for `allOf`, `oneOf` and `not` picking.
+  * Added support for `allOf`, `oneOf` and `not` picking.
 * 1.1.1
-  - Make it actually be greedy by default, dammit.
+  * Make it actually be greedy by default, dammit.
 * 1.1.0
-  - Added support for passing options to `is-my-json-valid`.
-  - Greedy mode on by default.
+  * Added support for passing options to `is-my-json-valid`.
+  * Greedy mode on by default.
 * 1.0.0
-  - Added support for JSON Schema Shorthands.
-  - Switched to StandardJS style guide.
+  * Added support for JSON Schema Shorthands.
+  * Switched to StandardJS style guide.
 * 0.2.0
-  - First real release.
+  * First real release.
 
 # Author
 
