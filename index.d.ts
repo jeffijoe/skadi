@@ -150,10 +150,13 @@ export interface ISchema<T> {
     anyOf: ISchema<T>[]
   }
   enum?: T[]
+  minLength?: number
+  maxLength?: number
   default?: SchemaPrimitiveType | Partial<T>
   additionalProperties?: ISchema<T> | boolean
   required?: boolean | string[]
   propertyOrder?: string[]
+  pattern?: string
   properties?: { [K in keyof T]?: string | ISchema<T[K]> }
   defaultProperties?: string[]
   typeof?: 'function'
