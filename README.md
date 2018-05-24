@@ -209,6 +209,10 @@ When using `validator.context(obj)`, a validation context is returned. This is w
 
 # Changelog
 
+* 1.6.0
+  * Pick props from `oneOf`, `anyOf`, `allOf` and `items` when sanitizing.
+* 1.5.1
+  * Add more fields to Schema typing.
 * 1.5.0
   * Add `createError` option to customize the error being thrown.
 * 1.4.0

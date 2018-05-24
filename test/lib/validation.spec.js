@@ -155,6 +155,59 @@ describe('validation utilities', function() {
           expect(err.errors.length).to.equal(1)
         })
       })
+
+      describe('sanitizing object with oneOf', () => {
+        it('returns the expected props', () => {
+          const v = createValidator({
+            type: 'object',
+            additionalProperties: false,
+            properties: {
+              name: 'string'
+            },
+            oneOf: [
+              {
+                additionalProperties: false,
+                type: 'object',
+                properties: {
+                  kind: { required: true, enum: ['Human'] },
+                  job: { required: true, type: 'string' }
+                }
+              },
+              {
+                additionalProperties: false,
+                type: 'object',
+                properties: {
+                  kind: { required: true, enum: ['Cat'] },
+                  breed: { required: true, type: 'string' }
+                }
+              }
+            ]
+          })
+
+          const human = v({
+            name: 'Jeff',
+            kind: 'Human',
+            job: 'Developer',
+            rofl: 'mao'
+          })
+          const cat = v({
+            name: 'Nano',
+            kind: 'Cat',
+            breed: 'Half birman',
+            rofl: 'mao'
+          })
+
+          expect(human).not.to.have.property('rofl')
+          expect(human.kind).to.equal('Human')
+          expect(human.name).to.equal('Jeff')
+          expect(human.job).to.equal('Developer')
+
+          expect(cat).not.to.have.property('rofl')
+          expect(cat.kind).to.equal('Cat')
+          expect(cat.name).to.equal('Nano')
+          expect(cat.breed).to.equal('Half birman')
+        })
+      })
     })
   })
 })
