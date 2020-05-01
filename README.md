@@ -29,15 +29,15 @@ const myValidator = createValidator({
   properties: {
     name: {
       type: 'string',
-      required: true
-    }
-  }
+      required: true,
+    },
+  },
 })
 
 // Use it
 const input = {
   name: 'Test',
-  otherStuffThatIsNotRelevant: 'hehe'
+  otherStuffThatIsNotRelevant: 'hehe',
 }
 
 const result = myValidator(input)
@@ -84,21 +84,21 @@ function createMyAwesomeValidator(db) {
   const validator = createValidator({
     type: 'object',
     properties: {
-      username: 'string!' // shortcut, see https://github.com/yanick/json-schema-shorthand#required-property
-    }
+      username: 'string!', // shortcut, see https://github.com/yanick/json-schema-shorthand#required-property
+    },
   })
 
-  return objToValidate => {
+  return (objToValidate) => {
     const context = validator.context(objToValidate)
 
     // Check if username is taken. This is async.
     return db.users
       .findWhere({ username: objToValidate.username })
-      .then(user => {
+      .then((user) => {
         if (!user) {
           context.errors.push({
             field: 'username',
-            message: 'This username is taken!'
+            message: 'This username is taken!',
           })
         }
 
@@ -113,10 +113,10 @@ function createMyAwesomeValidator(db) {
 // Create our validator..
 const myAwesomeValidator = createMyAwesomeValidator(someDbModule)
 myAwesomeValidator({ username: 'Skadi' })
-  .then(user => {
+  .then((user) => {
     // Success! We now have a sanitized user.
   })
-  .catch(err => {
+  .catch((err) => {
     // Could be a validation error.
     console.log(err instanceof ValidationError)
   })
@@ -134,9 +134,9 @@ Check the `example/` directory, there's an `index.js` that you can run with `nod
 
 The `skadi` object exports 3 things:
 
-* `createValidator`: the meat of the package.
-* `createPicker`: used internally, but could be useful to you.
-* `ValidationError`: thrown when you've got too much confidence.
+- `createValidator`: the meat of the package.
+- `createPicker`: used internally, but could be useful to you.
+- `ValidationError`: thrown when you've got too much confidence.
 
 ## `createValidator`
 
@@ -159,7 +159,7 @@ const myValidator = createValidator(
     // tells `is-my-json-valid` to provide some more info on each error
     verbose: true,
     // tells Skadi to throw the result of this function; gets passed the validation errors.
-    createError: validationErrors => new ValidationError(validationErrors)
+    createError: (validationErrors) => new ValidationError(validationErrors),
   }
 )
 
@@ -183,9 +183,9 @@ const myPicker = skadi.createPicker({
   additionalProperties: false,
   properties: {
     name: {
-      type: 'string'
-    }
-  }
+      type: 'string',
+    },
+  },
 })
 
 myPicker({ name: 'Skadi', other: 'stuff' })
@@ -202,37 +202,41 @@ Contains an `errors` array.
 
 When using `validator.context(obj)`, a validation context is returned. This is what you get:
 
-* `errors`: An array of `{ field, message }`. You can push and pop from it as you see fit. See the async validation use case for an example of how/why you'd want to do this.
-* `valid()`: Very simply checks the length of `errors`, and returns `true` if there are none, and `false` when there are errors. Does not throw.
-* `pick()`: Returns a sanitized version of the object passed to `context()`.
-* `end()`: If `valid()` returns false, will throw a `ValidationError` which will contain the errors array. If everything is smooth, returns a sanitized object (using `pick()`).
+- `errors`: An array of `{ field, message }`. You can push and pop from it as you see fit. See the async validation use case for an example of how/why you'd want to do this.
+- `valid()`: Very simply checks the length of `errors`, and returns `true` if there are none, and `false` when there are errors. Does not throw.
+- `pick()`: Returns a sanitized version of the object passed to `context()`.
+- `end()`: If `valid()` returns false, will throw a `ValidationError` which will contain the errors array. If everything is smooth, returns a sanitized object (using `pick()`).
 
 # Changelog
 
-* 1.6.0
-  * Pick props from `oneOf`, `anyOf`, `allOf` and `items` when sanitizing.
-* 1.5.1
-  * Add more fields to Schema typing.
-* 1.5.0
-  * Add `createError` option to customize the error being thrown.
-* 1.4.0
-  * Improved TypeScript type defs
-* 1.3.0
-  * Added TypeScript definitions.
-* 1.2.0
-  * Updated `json-schema-shorthand` to 0.2.0, which adds support for the `type!` shortcut.
-* 1.1.2
-  * Added support for `allOf`, `oneOf` and `not` picking.
-* 1.1.1
-  * Make it actually be greedy by default, dammit.
-* 1.1.0
-  * Added support for passing options to `is-my-json-valid`.
-  * Greedy mode on by default.
-* 1.0.0
-  * Added support for JSON Schema Shorthands.
-  * Switched to StandardJS style guide.
-* 0.2.0
-  * First real release.
+- 2.0.0
+  - Bumped Node engine version to `>=10`.
+  - Add JSONSchemaV6 schema type definition.
+  - Update packages.
+- 1.6.0
+  - Pick props from `oneOf`, `anyOf`, `allOf` and `items` when sanitizing.
+- 1.5.1
+  - Add more fields to Schema typing.
+- 1.5.0
+  - Add `createError` option to customize the error being thrown.
+- 1.4.0
+  - Improved TypeScript type defs
+- 1.3.0
+  - Added TypeScript definitions.
+- 1.2.0
+  - Updated `json-schema-shorthand` to 0.2.0, which adds support for the `type!` shortcut.
+- 1.1.2
+  - Added support for `allOf`, `oneOf` and `not` picking.
+- 1.1.1
+  - Make it actually be greedy by default, dammit.
+- 1.1.0
+  - Added support for passing options to `is-my-json-valid`.
+  - Greedy mode on by default.
+- 1.0.0
+  - Added support for JSON Schema Shorthands.
+  - Switched to StandardJS style guide.
+- 0.2.0
+  - First real release.
 
 # Author
 

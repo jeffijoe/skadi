@@ -5,7 +5,7 @@
   "main": "lib/skadi.js",
   "typings": "index.d.ts",
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=10.0.0"
   },
   "scripts": {
     "pretest": "tsc --noEmit test/typings/test.ts",
@@ -39,22 +39,22 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "coveralls": "^3.0.1",
-    "eslint": "^4.19.1",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-config-standard": "^11.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.12.0",
-    "eslint-plugin-node": "^6.0.1",
-    "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.1.0",
-    "eslint-watch": "^3.1.5",
-    "husky": "^0.14.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "eslint-watch": "^6.0.1",
+    "husky": "^4.2.5",
     "istanbul": "^0.4.5",
-    "lint-staged": "^7.1.2",
-    "mocha": "^5.2.0",
-    "prettier": "^1.12.1",
-    "sinon": "^5.0.9",
+    "lint-staged": "^10.2.2",
+    "mocha": "^7.1.2",
+    "prettier": "^2.0.5",
+    "sinon": "^9.0.2",
     "sinon-chai": "^3.1.0",
-    "typescript": "^2.8.3"
+    "typescript": "^3.8.3"
   },
   "dependencies": {
     "is-my-json-valid": "^2.17.2",

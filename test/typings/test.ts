@@ -3,7 +3,7 @@ import { createValidator, createPicker, ValidationError } from '../../'
 createValidator(
   {},
   {
-    additionalPropertiesProp: 'additionalProperties'
+    additionalPropertiesProp: 'additionalProperties',
   }
 )
 
@@ -23,7 +23,7 @@ const err = new ValidationError()
 err.errors[0].message
 err.errors[0].field
 
-type TypeToValidate = {
+interface TypeToValidate {
   hello: string
   world: number
   nested: {
@@ -31,6 +31,7 @@ type TypeToValidate = {
   }
   array: Array<{ wee: string; woo: number }>
   enumz: 'one' | 'two'
+  one_value_only: 'one'
 }
 
 createValidator<TypeToValidate>(
@@ -40,23 +41,26 @@ createValidator<TypeToValidate>(
       world: 'number',
       nested: {
         properties: {
-          yeah: 'string'
-        }
+          yeah: 'string',
+        },
       },
       array: {
         items: {
           properties: {
             wee: 'string',
-            woo: 'number'
-          }
-        }
+            woo: 'number',
+          },
+        },
       },
       enumz: {
-        enum: ['one', 'two']
-      }
-    }
+        enum: ['one', 'two'],
+      },
+      one_value_only: {
+        const: 'one',
+      },
+    },
   },
   {
-    createError: errors => new Error(errors.map(e => e.message).join(','))
+    createError: (errors) => new Error(errors.map((e) => e.message).join(',')),
   }
 )

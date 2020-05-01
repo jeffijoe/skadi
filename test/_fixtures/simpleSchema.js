@@ -10,12 +10,12 @@ module.exports = {
       additionalProperties: true,
       properties: {
         notifications: {
-          type: 'boolean'
-        }
-      }
+          type: 'boolean',
+        },
+      },
     },
     tags: {
-      array: 'string'
+      array: 'string',
     },
     notes: {
       type: 'array',
@@ -24,9 +24,9 @@ module.exports = {
         additionalProperties: false,
         properties: {
           title: 'string',
-          likes: 'number'
-        }
-      }
-    }
-  }
+          likes: 'number',
+        },
+      },
+    },
+  },
 }

@@ -4,19 +4,19 @@ const createPicker = schemaUtils.createPicker
 const rewriteSchema = schemaUtils.rewriteSchema
 const simpleSchema = require('../_fixtures/simpleSchema')
 
-describe('schema utilities', function() {
-  describe('createPicker', function() {
+describe('schema utilities', function () {
+  describe('createPicker', function () {
     let picker
     before(() => {
       picker = createPicker(rewriteSchema(simpleSchema), {
-        additionalPropertiesProp: '_additionalProperties'
+        additionalPropertiesProp: '_additionalProperties',
       })
     })
 
-    it('creates a function that will filter out unwanted properties', function() {
+    it('creates a function that will filter out unwanted properties', function () {
       const source = {
         name: 'Jeff',
-        dont: 'include me'
+        dont: 'include me',
       }
       const picked = picker(source)
 
@@ -24,50 +24,50 @@ describe('schema utilities', function() {
       picked.should.not.equal(source)
     })
 
-    it('supports simple arrays', function() {
+    it('supports simple arrays', function () {
       const picked = picker({
         tags: ['wat', 'the', 'fuck'],
-        cantDoit: 'not today'
+        cantDoit: 'not today',
       })
 
       picked.should.deep.equal({ tags: ['wat', 'the', 'fuck'] })
     })
 
-    it('supports object arrays', function() {
+    it('supports object arrays', function () {
       const picked = picker({
         notes: [{ title: 'A New World', lol: 'nope' }],
-        cantDoit: 'not today'
+        cantDoit: 'not today',
       })
 
       picked.should.deep.equal({ notes: [{ title: 'A New World' }] })
     })
 
-    it('supports additionalProperties:true', function() {
+    it('supports additionalProperties:true', function () {
       const src = { settings: { notifications: false, sad: true } }
       const picked = picker(src)
 
       picked.should.deep.equal(src)
     })
 
-    it('uses additionalProperties per default', function() {
+    it('uses additionalProperties per default', function () {
       const subject = createPicker({
         type: 'object',
         additionalProperties: false,
         properties: {
           name: {
-            type: 'string'
-          }
-        }
+            type: 'string',
+          },
+        },
       })
 
       subject({ name: 'test', other: 'stuff' }).should.deep.equal({
-        name: 'test'
+        name: 'test',
       })
     })
   })
 
-  describe('rewriteSchema', function() {
-    it('rewrites all additionalProperties to _additionalProperties if false', function() {
+  describe('rewriteSchema', function () {
+    it('rewrites all additionalProperties to _additionalProperties if false', function () {
       const newSchema = rewriteSchema(simpleSchema)
 
       newSchema.should.not.have.property('additionalProperties')
@@ -78,7 +78,7 @@ describe('schema utilities', function() {
       )
     })
 
-    it('supports definitions', function() {
+    it('supports definitions', function () {
       const newSchema = rewriteSchema({
         type: 'object',
         definitions: {
@@ -87,11 +87,11 @@ describe('schema utilities', function() {
             additionalProperties: false,
             properties: {
               cool: {
-                type: 'string'
-              }
-            }
-          }
-        }
+                type: 'string',
+              },
+            },
+          },
+        },
       })
 
       newSchema.should.not.have.property('additionalProperties')
@@ -102,7 +102,7 @@ describe('schema utilities', function() {
       newSchema.definitions.deffo.should.have.property('_additionalProperties')
     })
 
-    it('supports anyOf, allOf, oneOf and not', function() {
+    it('supports anyOf, allOf, oneOf and not', function () {
       const newSchema = rewriteSchema({
         anyOf: [
           {
@@ -110,9 +110,9 @@ describe('schema utilities', function() {
             additionalProperties: {},
             properties: {
               cool: {
-                type: 'string'
-              }
-            }
+                type: 'string',
+              },
+            },
           },
           {
             type: 'object',
@@ -125,13 +125,13 @@ describe('schema utilities', function() {
                     additionalProperties: false,
                     properties: {
                       cool: {
-                        type: 'string'
-                      }
-                    }
-                  }
-                ]
-              }
-            }
+                        type: 'string',
+                      },
+                    },
+                  },
+                ],
+              },
+            },
           },
           {
             type: 'object',
@@ -139,40 +139,40 @@ describe('schema utilities', function() {
             properties: {
               cool: {
                 not: {
-                  type: 'number'
-                }
+                  type: 'number',
+                },
               },
               someAllOf: {
                 allOf: [
                   {
                     object: {
-                      hey: 'string'
-                    }
+                      hey: 'string',
+                    },
                   },
                   {
                     object: {
-                      ho: 'string'
-                    }
-                  }
-                ]
+                      ho: 'string',
+                    },
+                  },
+                ],
               },
               someOneOf: {
                 oneOf: [
                   {
                     object: {
-                      hey: 'string'
-                    }
+                      hey: 'string',
+                    },
                   },
                   {
                     object: {
-                      ho: 'string'
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        ]
+                      ho: 'string',
+                    },
+                  },
+                ],
+              },
+            },
+          },
+        ],
       })
 
       newSchema.anyOf[0].should.have.property('additionalProperties')
