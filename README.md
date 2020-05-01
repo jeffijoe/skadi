@@ -209,6 +209,8 @@ When using `validator.context(obj)`, a validation context is returned. This is w
 
 # Changelog
 
+- 2.0.1
+  - Fix `required` TS typing regression.
 - 2.0.0
   - Bumped Node engine version to `>=10`.
   - Add JSONSchemaV6 schema type definition.
