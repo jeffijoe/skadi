@@ -209,6 +209,8 @@ When using `validator.context(obj)`, a validation context is returned. This is w
 
 # Changelog
 
+- 2.0.2
+  - Fix `additionalProperties` TS typing regression. I need to stop noobing it up.
 - 2.0.1
   - Fix `required` TS typing regression.
 - 2.0.0

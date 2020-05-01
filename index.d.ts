@@ -225,7 +225,7 @@ export interface ISchema<T> {
    * Omitting this keyword has the same behavior as an empty schema.
    * @see https://tools.ietf.org/html/draft-wright-json-schema-validation-01#section-6.10
    */
-  additionalItems?: IItemSchemaDef<T[any]>
+  additionalItems?: IItemSchemaDef<T[any]> | false
 
   /**
    * Must be a non-negative integer.
@@ -297,7 +297,7 @@ export interface ISchema<T> {
    * The default value is an empty schema which allows any value for additional properties.
    * @see https://tools.ietf.org/html/draft-wright-json-schema-validation-01#section-6.20
    */
-  additionalProperties?: ISchema<any>
+  additionalProperties?: ISchemaDef<any>
 
   /**
    * This provides an enumeration of all possible values that are valid

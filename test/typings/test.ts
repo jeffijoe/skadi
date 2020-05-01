@@ -48,9 +48,14 @@ createValidator<TypeToValidate>(
         properties: {
           yeah: 'string',
         },
+        additionalProperties: {
+          type: 'string',
+        },
       },
       array: {
+        additionalItems: false,
         items: {
+          additionalProperties: false,
           properties: {
             wee: 'string',
             woo: 'number',
