@@ -26,6 +26,7 @@ err.errors[0].field
 interface TypeToValidate {
   hello: string
   world: number
+  detailed: number
   nested: {
     yeah: string
   }
@@ -39,6 +40,10 @@ createValidator<TypeToValidate>(
     properties: {
       hello: 'string',
       world: 'number',
+      detailed: {
+        required: true,
+        type: 'number',
+      },
       nested: {
         properties: {
           yeah: 'string',

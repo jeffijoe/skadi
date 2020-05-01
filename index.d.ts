@@ -279,7 +279,7 @@ export interface ISchema<T> {
    *
    * @see https://tools.ietf.org/html/draft-wright-json-schema-validation-01#section-6.17
    */
-  required?: Array<keyof T>
+  required?: Array<keyof T> | boolean
 
   /**
    * This keyword determines how child instances validate for objects, and does not directly validate the immediate instance itself.
