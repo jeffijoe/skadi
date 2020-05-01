@@ -1,6 +1,6 @@
 {
   "name": "skadi",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "description": "A validation and object sanitizer based on is-my-json-valid",
   "main": "lib/skadi.js",
   "typings": "index.d.ts",
