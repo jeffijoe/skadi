@@ -135,7 +135,7 @@ export type ISchemaDef<T> = ISchema<T> | boolean
 export type IItemSchemaDef<T> = T extends Array<infer R>
   ? ISchemaDef<R> | ISchemaDef<R>[]
   : never
-export type JSONSchemaTypeName =
+export type JSONSchemaTypeName = `${
   | 'string'
   | 'number'
   | 'integer'
@@ -144,6 +144,21 @@ export type JSONSchemaTypeName =
   | 'array'
   | 'null'
   | 'any'
+  | 'date-time'
+  | 'date'
+  | 'time'
+  | 'email'
+  | 'ip-address'
+  | 'ipv4'
+  | 'ipv6'
+  | 'uri'
+  | 'color'
+  | 'hostname'
+  | 'alpha'
+  | 'alphanumeric'
+  | 'style'
+  | 'phone'
+  | 'utc-millisec'}${'' | '!'}`
 
 /**
  * JSON Schema V6
