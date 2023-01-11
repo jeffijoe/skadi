@@ -33,6 +33,8 @@ interface TypeToValidate {
   array: Array<{ wee: string; woo: number }>
   enumz: 'one' | 'two'
   one_value_only: 'one'
+  dates: string
+  required_shorthand: string
 }
 
 createValidator<TypeToValidate>(
@@ -68,6 +70,8 @@ createValidator<TypeToValidate>(
       one_value_only: {
         const: 'one',
       },
+      dates: 'date-time',
+      required_shorthand: 'date-time!',
     },
   },
   {
